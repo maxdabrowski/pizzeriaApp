@@ -12,11 +12,13 @@ mongoose.connect(config.db, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection erroe:'));
 
+var mainRouter = require('./routes/main');
+var staffRouter = require('./routes/staff');
+var kitchenRouter = require('./routes/kitchen');
+var managerRouter = require('./routes/manager');
+var menuRouter = require('./routes/menu');
 
-var indexRouter = require('./routes/index');
-var newsRouter = require('./routes/news');
-var quizRouter = require('./routes/quiz');
-var adminRouter = require('./routes/admin');
+
 
 
 
@@ -45,11 +47,12 @@ app.use(function(req,res,next){
 
 
 
-app.use('/', indexRouter);
-app.use('/news', newsRouter);
-app.use('/quiz', quizRouter);
-app.use('/admin', adminRouter);
-
+app.use('/', mainRouter);
+app.use('/staff', staffRouter);
+app.use('/kitchen', kitchenRouter);
+app.use('/manager', managerRouter);
+app.use('/manager/menu_manage', managerRouter);
+app.use('/menu', menuRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

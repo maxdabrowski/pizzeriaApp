@@ -1,0 +1,21 @@
+extends ../menu_manage
+
+block append content
+  a(href=`/manager/menu_manage/drink/add`) dodaj napój
+  each val, index in data
+    div.drinksMenuManage
+      hr
+      p=index
+      div.nameMenuDrink
+        span nazwa: 
+        span=data[index].name
+      div.nameMenuSize
+        span rozmiary: 
+        span=data[index].size     
+      div.nameMenuPrice
+        span ceny: 
+        span=data[index].price  
+      a(href=`/manager/menu_manage/drink/delete/${data[index].id}`) Usuń
+
+  
+  

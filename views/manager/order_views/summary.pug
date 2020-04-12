@@ -1,0 +1,27 @@
+extends orders_views
+
+block append content
+  p summary 
+  each val, index in tabPizza
+    div
+      span=index+1        
+      span  pizza: 
+      span=val[0] 
+      span  rozmiar:  
+      span=val[1]
+      span  cena:  
+      span=val[2]  
+  p=pizzaSum
+  each val, index in tabDrink
+    div
+      span=index+1        
+      span  napój: 
+      span=val[0] 
+      span  rozmiar:  
+      span=val[1]
+      span  cena:  
+      span=val[2]  
+  p=drinkSum
+    div
+     span sosy:
+     span=sauceSum

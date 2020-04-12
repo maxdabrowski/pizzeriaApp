@@ -1,0 +1,15 @@
+extends ../index
+
+block append content
+  h1= title
+  a(href=`/manager/order_views/all`) Wszystkie 
+  br
+  a(href=`/manager/order_views/unconfirmed`) Niezatwierdzone
+  br
+  a(href=`/manager/order_views/unpaid`) Niezapłacone
+  br
+  a(href=`/manager/order_views/summary`) Podsumowania 
+
+
+
+        

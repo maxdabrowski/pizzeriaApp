@@ -3,19 +3,24 @@ mixin item(title, url)
   li
     a(href=url class=path == url ? 'active' : '')=title
 
-
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
-    span=path
-    ul
-      +item('Strona główna', '/')
-      +item('Aktualności', '/news')
-      +item('Quiz', '/quiz')
-      +item('Admin', '/admin')
-
-
+    h1#title.title='PadrePizza'
+    nav
+      ul
+        +item('Strona główna', '/')
+        +item('Obsługa', '/staff ')
+        +item('Kuchnia', '/kitchen')
+        +item('Manager', '/manager')
 
     block content
+    block foot
+      script(type='text/javascript', src="/javascripts/eventHandling.js")
+
+
+
+

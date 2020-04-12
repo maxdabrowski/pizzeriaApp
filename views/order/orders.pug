@@ -1,0 +1,60 @@
+extends order_menu
+
+block append content
+  p Wszystkie niezrealizowane zamówienia 
+  each val, index in data
+    div.orderpizza
+      p=index+1
+      span Numer zamówienia: 
+      span=val.id.substr(20)
+      br
+      span Data i godzina zamówienia: 
+      span=val.created
+      div
+      each valIn, indexIn in val.pizza  
+        span=indexIn+1+') '
+        span  pizza: 
+        span=valIn+', ' 
+        span  rozmiar:  
+        span=val.pizzaSize[indexIn]+' cm, '
+        span  cena:  
+        span=val.pizzaPrice[indexIn]+' zł'
+        br
+      div
+      each valIn, indexIn in val.drink
+        span=indexIn+1+') '
+        span  napój: 
+        span=valIn+', ' 
+        span  rozmiar:  
+        span=val.drinkSize[indexIn]+', '
+        span  cena:  
+        span=val.drinkPrice[indexIn]+' zł'
+        br
+      div
+        span dopłata za sosy: 
+        span=val.soucePrice + " zł" 
+      div
+        span Miejsce wydania: 
+        span=val.impact
+      div
+        span do zapłaty: 
+        span=val.toPay + " zł"    
+
+      if(type==='unpaid')
+        div
+          a(href=`/staff/unpaid/change/${val.id}`) Zapłać
+
+      if(type==='readyLocal')
+        div
+          a(href=`/staff/ready/changeReadyLocal/${val.id}`) Wydano
+          br
+          if(val.paidOrder == false )
+            a(href=`/staff/ready/changePaidLocal/${val.id}`) Zapłać
+
+      if(type==='readyTakeaway')
+        div
+          a(href=`/staff/ready/changeReadyTakeaway/${val.id}`) Dostawa
+          br
+          if(val.paidOrder == false )
+            a(href=`/staff/ready/changePaidTakeaway/${val.id}`) Zapłać               
+          hr     

@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  p=title
+  div.orderpizza
+      a(href=`/staff/order`) x
+      span Numer zamówienia: 
+      span=orderData[0].id.substr(20)
+      br
+      span Data i godzina zamówienia: 
+      span=orderData[0].created
+      div
+      each val, index in orderData[0].pizza  
+        span=index+1+') '
+        span  pizza: 
+        span=val+', ' 
+        span  rozmiar:  
+        span=orderData[0].pizzaSize[index]+' cm, '
+        span  cena:  
+        span=orderData[0].pizzaPrice[index]+' zł'
+        br
+      div
+      each val, index in orderData[0].drink
+        if(val!=='')
+          span=index+1+') '
+          span  napój: 
+          span=val+', ' 
+          span  rozmiar:  
+          span=orderData[0].drinkSize[index]+', '
+          span  cena:  
+          span=orderData[0].drinkPrice[index]+' zł'
+        br
+      div
+        span dopłata za sosy: 
+        span=orderData[0].soucePrice + " zł" 
+      div
+        span Miejsce wydania: 
+        span=orderData[0].impact
+      div
+        span do zapłaty: 
+        span=orderData[0].toPay + " zł"    
+      div
+        if(orderData[0].paidOrder == false)
+          a(href=`/staff/order/paid/${orderData[0].id}`) Zapłać
+        a(href=`/staff/order/addOrder/${orderData[0].id}`) Gotowe    

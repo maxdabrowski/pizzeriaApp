@@ -1,0 +1,24 @@
+extends ../menu_manage
+
+block append content
+  a(href=`/manager/menu_manage/pizza/add`) dodaj pizze
+  each val, index in data
+    div.pizzaMenuManage
+      hr
+      p=index+1
+      div.nameMenuPizza
+        span nazwa: 
+        span=data[index].name
+      div.nameMenuSize
+        span rozmiary: 
+        span=data[index].size     
+      div.nameMenuPrice
+        span ceny: 
+        span=data[index].price  
+      div.nameMenuIngredients
+        span składniki: 
+        span=data[index].ingredients
+      a(href=`/manager/menu_manage/pizza/delete/${data[index].id}`) Usuń
+      a(href=`/manager/menu_manage/pizza/change/${data[index].id}`) Zmień
+  
+  

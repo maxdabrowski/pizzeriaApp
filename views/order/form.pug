@@ -1,0 +1,78 @@
+extends ../layout
+
+block content
+  h1= title
+
+block append content
+  p=title
+    div
+    a(href=`/staff`) x
+    form(method='post')
+      p Pizze
+      div#pizzaSelect
+        div#firstSelect
+          br
+          label Wybierz pizzę:
+          select#firstSelectPizza(name="pizza")
+            each val, index in dataPizza 
+              option(name='pizza' value=val.name)=val.name
+          label Wybierz rozmiar:
+          select#firstSelectPizzaSize(name="pizzaSize") 
+            option(value=0) mała
+            option(value=1) średnia           
+            option(value=2) duża        
+      div#addPizza dodaj kolejną pizzę
+      p Napoje
+        div#drinkSelect
+          div#firstSelect2
+          br
+          label Wybierz napój:
+          select#firstSelectDrink(name="drink")
+              option(value="")
+              each val, index in dataDrink 
+                option(value=val.name)=val.name
+          label Wybierz rozmiar:
+          select#firstSelectDrinkSize(name="drinkSize") 
+            option(value=0) mała
+            option(value=1) duża          
+      div#addDrink dodaj kolejny napój     
+      div
+        p sosy
+          br
+          label czosnkowy
+            select(name="garlicSauce")
+              option(value="0") 0
+              option(value="1") 1             
+              option(value="2") 2
+              option(value="3") 3
+              option(value="4") 4
+              option(value="5") 5
+
+          label pomidorowy
+            select(name="tomatooSauce")
+              option(value="0") 0
+              option(value="1") 1            
+              option(value="2") 2
+              option(value="3") 3
+              option(value="4") 4  
+              option(value="5") 5  
+      div           
+        label stolik:
+          select(name="tableNumber")
+            option(value="1") 1
+            option(value="2") 2          
+            option(value="3") 3
+            option(value="4") 4 
+            option(value="5") 5
+      div
+        p Liczba osób:
+          input(type='number', placeholder='liczba osób' name='customers') 
+      div           
+        label rodzaj zamówienia:
+          select(name="impact")
+            option(value="lokal") Lokal
+            option(value="na wynos") Na wynos          
+      div
+        p dodatkowe informacje, uwagi:
+          textarea(name='description')
+      button(type='submit') Gotowe 
