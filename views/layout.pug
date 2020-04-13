@@ -1,23 +1,32 @@
 doctype html
 mixin item(title, url)
-  li
     a(href=url class=path == url ? 'active' : '')=title
 
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-
+    link(rel='stylesheet', href='/stylesheets/styleHeader.css')
+    link(rel='stylesheet', href='/stylesheets/styleMain.css')   
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Unica+One')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&display=swap')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Maven+Pro&display=swap')    
   body
-    h1#title.title='PadrePizza'
-    nav
-      ul
-        +item('Strona główna', '/')
-        +item('Obsługa', '/staff ')
-        +item('Kuchnia', '/kitchen')
-        +item('Manager', '/manager')
-
-    block content
+    div.app
+      header.tittle   
+        img(src='/images/pizza.jpg').img
+        div.tittleDescription
+          p CESARE PIZZA
+      nav
+        div(class='ph-line-nav nav')
+          +item('STRONA GŁÓWNA', '/')
+          +item('OBSŁUGA', '/staff')
+          +item('KUCHNIA', '/kitchen')
+          +item('MANAGER', '/manager')
+          div.effect
+      hr
+      main
+        block content
     block foot
       script(type='text/javascript', src="/javascripts/eventHandling.js")
 

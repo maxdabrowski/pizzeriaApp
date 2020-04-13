@@ -1,10 +1,12 @@
 extends layout
 
 block content
-    h1.loginDescription Jeżeli chcesz się zalogować musisz podać hasło 
-    form( class='loginForm' method='post')
-        p
+    p podaj hasło aby się zalogować 
+    form( class='form' method='post')
+        div.form-row
             label Hasło
-            input(type='password' name='password')
-            input(class='button' type='submit' value='Zaloguj')
-        
+            div.passwordRow
+                input(type='password' name='password')
+                input(class='button' type='submit' value='Zaloguj')
+            if(error)
+              p.passwordError błędne hasło, spróbuj ponownie

@@ -1,44 +1,34 @@
 extends ../layout
 
-block content
-  h1= title
-
 block append content
-  p=title
-    div
-    a(href=`/staff`) x
-    form(method='post')
-      p Pizze
+  div.newOrderForm
+    form(method='post' class='form')
+      p Wypełnij formularz zamównienia 
       div#pizzaSelect
-        div#firstSelect
-          br
-          label Wybierz pizzę:
-          select#firstSelectPizza(name="pizza")
-            each val, index in dataPizza 
-              option(name='pizza' value=val.name)=val.name
-          label Wybierz rozmiar:
-          select#firstSelectPizzaSize(name="pizzaSize") 
-            option(value=0) mała
-            option(value=1) średnia           
-            option(value=2) duża        
-      div#addPizza dodaj kolejną pizzę
-      p Napoje
-        div#drinkSelect
-          div#firstSelect2
-          br
-          label Wybierz napój:
+        div.oneSelect
+          label Wybierz pizzę i rozmiar:
+          div.selectForm
+            select#firstSelectPizza(name="pizza")
+              each val, index in dataPizza 
+                option(name='pizza' value=val.name)=val.name
+            select#firstSelectPizzaSize(name="pizzaSize") 
+              option(value=0) mała
+              option(value=1) średnia           
+              option(value=2) duża        
+      span(id='addPizza' class='button') dodaj kolejną pizzę
+      div#drinkSelect
+        label Wybierz napój i rozmiar:
+        div.selectForm
           select#firstSelectDrink(name="drink")
               option(value="")
               each val, index in dataDrink 
                 option(value=val.name)=val.name
-          label Wybierz rozmiar:
           select#firstSelectDrinkSize(name="drinkSize") 
             option(value=0) mała
             option(value=1) duża          
-      div#addDrink dodaj kolejny napój     
+      span(id='addDrink' class='button') dodaj kolejny napój 
       div
-        p sosy
-          br
+        p Podaj liczbę sosów
           label czosnkowy
             select(name="garlicSauce")
               option(value="0") 0
@@ -75,4 +65,5 @@ block append content
       div
         p dodatkowe informacje, uwagi:
           textarea(name='description')
+      a(href=`/staff` class='close') Cofnij
       button(type='submit') Gotowe 

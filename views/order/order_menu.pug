@@ -1,13 +1,10 @@
 extends ../layout
 
 block content
-  h1= title
-  a(href=`/staff/order/`) dodaj zamówienie
-  br
-  a(href=`/staff/prepared`) W przygotowaniu
-  br
-  a(href=`/staff/ready/local`) Gotowe (lokal)
-  br
-  a(href=`/staff/ready/takeaway`) Gotowe (na wynos)
-  br
-  a(href=`/staff/unpaid/`) Niezapłacone
+  p w tej zakładce możesz stworzyć nowe zamówienie, a także przeglądać i modyfikować poszczególne parametry zamówień, w celu przyspieszneia i ulepszenia procesu od zamówienia do wydania.
+  div.secondNav
+    +item('DODAJ', `/staff/order/`)
+    +item('PRZYGOTOWANIE', `/staff/prepared`)  
+    +item('GOTOWE(lokal)', `/staff/ready/local`)
+    +item('GOTOWE(wynos)', `/staff/ready/takeaway`)
+    +item('NIEZAPŁACONE', `/staff/unpaid/`)

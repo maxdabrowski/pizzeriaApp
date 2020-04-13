@@ -246,6 +246,4 @@ router.get('/order_views/summary', (req, res) => {
   })
 });
 
-
-
 module.exports = router;
