@@ -29,7 +29,6 @@ document.getElementById("addPizza").addEventListener('click', function(){
 
 
 // elementy do wyboru rozmiaru
- const labelSize = document.createElement("label");
  const selectSize = document.createElement("select");
  const optionSize1 = document.createElement("option");
  const optionSize2 = document.createElement("option");
@@ -39,15 +38,13 @@ document.getElementById("addPizza").addEventListener('click', function(){
  const deletePizza = document.createElement("span");
 deletePizza.innerText="usuń";
 deletePizza.setAttribute('class','delete');
+deletePizza.setAttribute('class','button');
 deletePizza.setAttribute('id',`delPizza${delPizza}`);
 deletePizza.setAttribute('onClick',`deleteItem('delPizza${delPizza}')`);
 
 
 //tworzenie zależności DOM
-div.appendChild(labelPizza);
 div.appendChild(selectPizza);
-
-div.appendChild(labelSize);
 div.appendChild(selectSize);
 
 selectSize.appendChild(optionSize1);
@@ -57,8 +54,7 @@ selectSize.appendChild(optionSize3);
 div.appendChild(deletePizza);
 
 //dodawanie atrybutów 
-labelPizza.innerText="Wybierz pizzę:";
-labelSize.innerText="Wybierz rozmiar:";
+labelPizza.innerText="Wybierz pizzę i rozmiar:";
 
 optionSize1.innerText="mała";
 optionSize1.setAttribute('value',0);
@@ -69,8 +65,9 @@ optionSize2.setAttribute('value',1);
 optionSize3.innerText="duża";
 optionSize3.setAttribute('value',2);
 
+pizza.appendChild(labelPizza);
 pizza.appendChild(div);
-
+div.setAttribute('class','selectForm')
 })
 
 
@@ -105,7 +102,7 @@ document.getElementById("addDrink").addEventListener('click', function(){
 
 
 // elementy do wyboru rozmiaru
- const labelSize = document.createElement("label");
+ //const labelSize = document.createElement("label");
  const selectSize = document.createElement("select");
  const optionSize1 = document.createElement("option");
  const optionSize2 = document.createElement("option");
@@ -114,6 +111,7 @@ document.getElementById("addDrink").addEventListener('click', function(){
  const deleteDrink = document.createElement("span")
 deleteDrink.innerText="usuń"
 deleteDrink.setAttribute('class','delete');
+
 deleteDrink.setAttribute('id',`delDrink${delDrink}`);
 deleteDrink.setAttribute('onClick',`deleteItem('delDrink${delDrink}')`);
 
