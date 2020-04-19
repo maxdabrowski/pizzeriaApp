@@ -92,6 +92,29 @@ router.post('/order', (req, res) => {
       }
       const toPay = sumPizzaDrink + priceSouce;
 
+      //ustawienie daty zamówienia 
+      const dateNow = new Date();
+      const year = dateNow.getFullYear();
+      let month = dateNow.getMonth()+1;
+      let day = dateNow.getDate();
+      let hour = dateNow.getHours();
+      let minute = dateNow.getMinutes()+1;
+  
+      if(month <10){
+        month = '0'+month
+      }
+      if(day <10){
+        day = '0'+day
+      }
+      if(hour <10){
+        hour = '0'+hour
+      }
+      if(minute <10){
+        minute = '0'+minute
+      }
+
+      const dateFormat = day+'.'+month+'.'+year + ' godz. ' + hour + ':' + minute
+
       //tworzenie szablonu zamówienia do zapisania do bazy 
       const orderData = new Order({
         customers: req.body.customers,
@@ -113,13 +136,12 @@ router.post('/order', (req, res) => {
         paidOrder: false,
         serveOrder: false,
         confirmed: false,
-
+        created: dateFormat,
       });
 
       //zapisywanie do bazy
       orderData.save(()=>{
         Order.find({_id: orderData.id}, (err,orderData)=>{
-          console.log(orderData)
           res.render('order/summary', {title: 'Podsumowanie zamówienia',orderData})
       });
       });
@@ -132,7 +154,7 @@ router.get('/order/paid/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {paidOrder:true}, ()=>{
       Order.find({_id: req.params.id}, (err,orderData)=>{
-      res.render('order/summary', {title: 'Podsumowanie zamówienia2', orderData})
+      res.render('order/summary', {title: 'Podsumowanie zamówienia', orderData})
       });
     })
 });
@@ -141,10 +163,9 @@ router.get('/order/paid/:id', (req, res) => {
 router.get('/order/addOrder/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {confirmed:true}, ()=>{
-      Order.find({confirmed: true, makeOrder: false}, (err,data)=>{
-      res.render('order/orders',  { title: 'W przygotowaniu',type:'Prepared', data})
-      });
-    })
+      //zmienić ścieżkę na taką jaka bedzie do hostowania za localhosta
+      res.redirect('http://localhost:3000/staff/prepared')
+    });
 });
 
 
@@ -193,6 +214,7 @@ router.get('/ready/changeReadyLocal/:id', (req, res) => {
 //renderowanie gotowych zamówień zamówionych na wynos 
 router.get('/ready/takeaway', (req, res) => {
   Order.find({confirmed: true, makeOrder: true, impact: 'takeaway'},(err,data)=>{
+    console.log(data)
     res.render('order/orders', { title: 'Gotowe na wynos', type:'readyTakeaway', data});
   })
 });

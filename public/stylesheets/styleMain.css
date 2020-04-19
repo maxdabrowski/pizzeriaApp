@@ -15,7 +15,8 @@ main{
 
 /*style dla formularza*/
 .form {
-  width: 100%;
+  /*width: 80%;*/
+  margin:0 auto;
 }
 
 .form-row {
@@ -60,7 +61,6 @@ margin-right:10px;
   border-radius:0.2rem;
   color:#fff;
   font-size:1.0rem;
-  /*font-weight: bold;*/
   transition: 0.3s;
   cursor: pointer;
   vertical-align: middle; 
@@ -69,20 +69,18 @@ margin-right:10px;
 .button:hover {
   background:  #A21310;
 }
+
 .passwordError{
-  color: red;
+  color:  #c6342e;
   font-size: 15px;
 }
 
-textarea
-{
+textarea{
   border-radius:0.2rem;
-  font-family:sans-serif;
-  padding:0.8rem;
   display: block;
-  width:100%;
+  width:99%;
   color:#666;
-  height: 5rem;
+  height: 50px;
 }
 
 
@@ -97,23 +95,118 @@ textarea
 	text-decoration: none;
   color: #393939;
   font-size: 18px;
+  margin:0 0 auto;
 }
 
 .secondNav a:hover {
   color: #c6342e;
   border-bottom: 1px solid #c6342e ;
-  background-color: white;
 }
 
 .newOrderForm{
-  border: 1px solid #393939; 
   margin-top:30px;
   margin-bottom:30px;
 }
+
 .selectForm{
   display: flex;
 }
 
 #drinkSelect{
   margin-top: 30px;
+}
+#firstSelectPizza,
+#firstSelectPizzaSize,
+#firstSelectDrink,
+#firstSelectDrinkSize
+{
+  margin-bottom: 15px;
+}
+
+.delete{
+  position:relative;
+  top: -30px;
+  left:62%;
+}
+
+.selectFormParent{
+  margin-top: 20px;
+}
+.formSubmit{
+  float:right
+}
+
+.summaryOrder{
+  border: 1px solid #666;
+  border-radius: 0.5rem;
+  line-height: 1.8;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.summaryItem{
+  display: flex;
+}
+
+.summaryType{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.summaryDescript{
+  Width:33%;
+  display: flex;
+}
+.bold{
+  font-weight: bold;
+}
+.closeCross{
+  position:relative;
+  bottom: 18px;
+  left:96%;
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.pay{
+  margin-right:30px;
+}
+.attention{
+  margin-top: 100px;
+  text-align: center;
+  color:  #c6342e;
+  font-style: italic;
+}
+p{
+  margin: 0px;
+}
+.red{
+  color: #c6342e;
+}
+.managerNav a{
+  width: 50%;
+}
+.menuManageDescript{
+  padding-top:70px;
+}
+.thirdNav{
+  width: 100%;
+}
+.thirdNav a{
+  text-align: center;
+  display: block;
+  position: relative;
+	float: left;
+	padding: 1em 0 1em;
+  width: 50%;
+	text-decoration: none;
+  color: #393939;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.thirdNav a:hover{
+  color: #c6342e;
+}
+.top{
+  margin-top: 10px;
 }

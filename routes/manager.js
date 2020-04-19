@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/menu_manage', (req,res) =>{ 
   Pizza.find({}, (err,data)=>{
     res.render('manager/menu_manage', {title: 'Zarządzanie menu', data})
-  });
+  });9+
 });
 
   //renderowanie zakładki sprawdż zamówienia

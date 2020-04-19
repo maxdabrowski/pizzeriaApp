@@ -1,45 +1,51 @@
 extends ../layout
 
 block content
-  p=title
-  div.orderpizza
-      a(href=`/staff/order`) x
-      span Numer zamówienia: 
-      span=orderData[0].id.substr(20)
+  P.summaryType do każdej sztuki pizzy przysługują 2 sosy, za każdy dodatkowy sos naliczane jest 3zł dopłaty
+  div.summaryOrder
+      a(href=`/staff/order` class='closeCross button') X
+      span NUMER ZAMÓWIENIEA: 
+      span(class='bold')=orderData[0].id.substr(20)
       br
       span Data i godzina zamówienia: 
-      span=orderData[0].created
-      div
-      each val, index in orderData[0].pizza  
-        span=index+1+') '
-        span  pizza: 
-        span=val+', ' 
-        span  rozmiar:  
-        span=orderData[0].pizzaSize[index]+' cm, '
-        span  cena:  
-        span=orderData[0].pizzaPrice[index]+' zł'
-        br
-      div
-      each val, index in orderData[0].drink
-        if(val!=='')
-          span=index+1+') '
-          span  napój: 
-          span=val+', ' 
-          span  rozmiar:  
-          span=orderData[0].drinkSize[index]+', '
-          span  cena:  
-          span=orderData[0].drinkPrice[index]+' zł'
-        br
-      div
+      span(class='bold')=orderData[0].created
+      div.summaryType
+        each val, index in orderData[0].pizza  
+          div.summaryItem
+            span=index+1+') '
+            div.summaryDescript
+              span  pizza: 
+              span(class='bold')=val+', '
+            div.summaryDescript
+              span  rozmiar:  
+              span(class='bold')=orderData[0].pizzaSize[index]+' cm, '
+            div.summaryDescript
+              span  cena:  
+              span(class='bold')=orderData[0].pizzaPrice[index]+' zł'
+      div.summaryType
+        each val, index in orderData[0].drink
+          if(val!=='')
+            div.summaryItem
+              span=index+1+') '
+              div.summaryDescript
+                span  napój: 
+                span(class='bold')=val+', ' 
+              div.summaryDescript
+                span  rozmiar:  
+                span(class="bold")=orderData[0].drinkSize[index]+', '
+              div.summaryDescript
+                span  cena:  
+                span(class='bold')=orderData[0].drinkPrice[index]+' zł'
+      div.summaryItem
         span dopłata za sosy: 
-        span=orderData[0].soucePrice + " zł" 
-      div
+        span(class='bold')=orderData[0].soucePrice + " zł" 
+      div.summaryItem
         span Miejsce wydania: 
-        span=orderData[0].impact
-      div
+        span(class='bold')=orderData[0].impact
+      div.summaryItem
         span do zapłaty: 
-        span=orderData[0].toPay + " zł"    
+        span(class='bold')=orderData[0].toPay + " zł"    
       div
         if(orderData[0].paidOrder == false)
-          a(href=`/staff/order/paid/${orderData[0].id}`) Zapłać
-        a(href=`/staff/order/addOrder/${orderData[0].id}`) Gotowe    
+          a(href=`/staff/order/paid/${orderData[0].id}` class='button pay') Zapłać
+        a(href=`/staff/order/addOrder/${orderData[0].id}` class='button') Gotowe    

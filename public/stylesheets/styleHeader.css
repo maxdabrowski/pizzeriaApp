@@ -84,3 +84,11 @@
   font-weight: bold;
   color: #c6342e !important ;
 }
+a{
+  text-decoration: none;
+}
+.listElement{
+  margin-top:20px;
+  margin-bottom:20px;
+}
+

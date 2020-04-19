@@ -1,28 +1,35 @@
 extends layout
 
 block content
-  p=title
-  each val, index in data
-    div.orderKitchen
-      p=index+1
-      span Numer zamówienia: 
-      span=data[index].id.substr(20)
-      div
-      each valIn, indexIn in data[index].pizza  
-        span=indexIn+1+') '
-        span  pizza: 
-        span=valIn+', ' 
-        span  rozmiar:  
-        span=data[index].pizzaSize[indexIn]
-        span  składniki:  
-        span=data[index].ingredients[indexIn]
+  if(data.length == 0)
+    div.attention brak bierzących zamówień do wykonania
+  else
+    div.attention zamówienia posegregowane są od najstarszych do najmłodszych  
+    each val, index in data
+      div.listElement
+        p(class='bold')=index+1+'.'
+        span Numer zamówienia: 
+        span(class='bold')=data[index].id.substr(20)
         br
-      div
-        span dodatkowe informacje: 
-        span=data[index].description 
-      div  
-        span miejsce wydania: 
-        span=data[index].impact  
-      a(href=`/kitchen/change/${data[index].id}`) Wykonano
-      hr
+        span Data i godzina zamówienia: 
+        span(class='bold')=val.created        
+        div.summaryType
+        each valIn, indexIn in data[index].pizza  
+          span=indexIn+1+') '
+          span  pizza: 
+          span(class='bold')=valIn+', ' 
+          span  rozmiar:  
+          span(class='bold')=data[index].pizzaSize[indexIn]+ 'cm, '
+          span  składniki:  
+          span(class='bold')=data[index].ingredients[indexIn]
+          br
+        div.summaryType
+          span dodatkowe informacje: 
+          span(class='red bold')=data[index].description 
+        div.summaryType
+          span miejsce wydania: 
+          span(class='bold')=data[index].impact  
+        div.summaryType        
+          a(href=`/kitchen/change/${data[index].id}` class='button') Wykonano
+        hr
   

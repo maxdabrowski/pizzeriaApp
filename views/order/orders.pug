@@ -1,60 +1,58 @@
 extends order_menu
 
 block append content
-  p Wszystkie niezrealizowane zamówienia 
-  each val, index in data
-    div.orderpizza
-      p=index+1
-      span Numer zamówienia: 
-      span=val.id.substr(20)
-      br
-      span Data i godzina zamówienia: 
-      span=val.created
-      div
-      each valIn, indexIn in val.pizza  
-        span=indexIn+1+') '
-        span  pizza: 
-        span=valIn+', ' 
-        span  rozmiar:  
-        span=val.pizzaSize[indexIn]+' cm, '
-        span  cena:  
-        span=val.pizzaPrice[indexIn]+' zł'
+  if(data.length == 0)
+    div.attention brak zaległych zamówień danego typu
+  else
+    div.attention zamówienia posegregowane są od najstarszych do najmłodszych 
+    each val, index in data
+      div.listElement
+        p(class='bold')=index+1+'.'
+        span Numer zamówienia: 
+        span(class='bold')=val.id.substr(20)
         br
-      div
-      each valIn, indexIn in val.drink
-        span=indexIn+1+') '
-        span  napój: 
-        span=valIn+', ' 
-        span  rozmiar:  
-        span=val.drinkSize[indexIn]+', '
-        span  cena:  
-        span=val.drinkPrice[indexIn]+' zł'
-        br
-      div
-        span dopłata za sosy: 
-        span=val.soucePrice + " zł" 
-      div
-        span Miejsce wydania: 
-        span=val.impact
-      div
-        span do zapłaty: 
-        span=val.toPay + " zł"    
-
-      if(type==='unpaid')
+        span Data i godzina zamówienia: 
+        span(class='bold')=val.created
+        div.summaryType
+          each valIn, indexIn in val.pizza  
+            span=indexIn+1+') '
+            span  pizza: 
+            span=valIn+', ' 
+            span  rozmiar:  
+            span=val.pizzaSize[indexIn]+' cm, '
+            span  cena:  
+            span=val.pizzaPrice[indexIn]+' zł'
+            br
+        if(val.drinks !== [])
+          div.summaryType
+            each valIn, indexIn in val.drink
+              if(valIn !== '')
+                span=indexIn+1+') '
+                span  napój: 
+                span=valIn+', ' 
+                span  rozmiar:  
+                span=val.drinkSize[indexIn]+', '
+                span  cena:  
+                span=val.drinkPrice[indexIn]+' zł'
+                br
         div
-          a(href=`/staff/unpaid/change/${val.id}`) Zapłać
+          span Miejsce wydania: 
+          span=val.impact
+        div.summaryType
+          span do zapłaty: 
+          span(class='bold')=val.toPay + " zł"    
+        if(type==='unpaid')
+          div.summaryType
+            a(href=`/staff/unpaid/change/${val.id}` class='button') Zapłać
+        if(type==='readyLocal')
+          div.summaryType
+            a(href=`/staff/ready/changeReadyLocal/${val.id}` class='button pay') Wydano
+            if(val.paidOrder == false )
+              a(href=`/staff/ready/changePaidLocal/${val.id}` class='button') Zapłać
 
-      if(type==='readyLocal')
-        div
-          a(href=`/staff/ready/changeReadyLocal/${val.id}`) Wydano
-          br
-          if(val.paidOrder == false )
-            a(href=`/staff/ready/changePaidLocal/${val.id}`) Zapłać
-
-      if(type==='readyTakeaway')
-        div
-          a(href=`/staff/ready/changeReadyTakeaway/${val.id}`) Dostawa
-          br
-          if(val.paidOrder == false )
-            a(href=`/staff/ready/changePaidTakeaway/${val.id}`) Zapłać               
-          hr     
+        if(type==='readyTakeaway')
+          div.summaryType
+            a(href=`/staff/ready/changeReadyTakeaway/${val.id}` class='button pay') Dostawa
+            if(val.paidOrder == false )
+              a(href=`/staff/ready/changePaidTakeaway/${val.id}` class='button') Zapłać               
+        hr     

@@ -27,9 +27,9 @@ block append content
             option(value=0) mała
             option(value=1) duża          
       span(id='addDrink' class='button') dodaj kolejny napój 
-      div
-        p Podaj liczbę sosów
-          label czosnkowy
+      div.selectFormParent
+        label Podaj liczbę sosób czosnkowych i pomidorowych:
+          div.selectForm
             select(name="garlicSauce")
               option(value="0") 0
               option(value="1") 1             
@@ -37,8 +37,6 @@ block append content
               option(value="3") 3
               option(value="4") 4
               option(value="5") 5
-
-          label pomidorowy
             select(name="tomatooSauce")
               option(value="0") 0
               option(value="1") 1            
@@ -47,23 +45,24 @@ block append content
               option(value="4") 4  
               option(value="5") 5  
       div           
-        label stolik:
+        label Numer stolika:
           select(name="tableNumber")
-            option(value="1") 1
-            option(value="2") 2          
-            option(value="3") 3
-            option(value="4") 4 
+            option(value="1") na wynos
+            option(value="2") 1         
+            option(value="3") 2
+            option(value="4") 3 
+            option(value="5") 4
             option(value="5") 5
-      div
-        p Liczba osób:
-          input(type='number', placeholder='liczba osób' name='customers') 
       div           
-        label rodzaj zamówienia:
+        label Rodzaj zamówienia:
           select(name="impact")
             option(value="lokal") Lokal
-            option(value="na wynos") Na wynos          
+            option(value="na wynos") Na wynos       
       div
-        p dodatkowe informacje, uwagi:
+        label Liczba osób:
+          input(type='number', placeholder='liczba osób' name='customers')    
+      div
+        label Dodatkowe informacje, uwagi:
           textarea(name='description')
-      a(href=`/staff` class='close') Cofnij
-      button(type='submit') Gotowe 
+      a(href=`/staff` class='close button') Cofnij
+      button(type='submit' class='button formSubmit') Gotowe 

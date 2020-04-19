@@ -1,11 +1,9 @@
 extends index
 
 block append content
-
-  h1 zarządzanie menu 
-  p poniżej znajdują sie serwowane przez lokal dania oraz napoje, mozesz modyfikować ich nazwy, składniki, rozmiary, ceny, oraz podać linki do zdjęć. Możesz również usuwać dania oraz dodawać nowe według zawartego formularza. Kliknij przyciski usuń, zmień oraz dodaj, aby sprawdzić jak to działa 
-  p Dostępne pizze
-  a(href=`/manager/menu_manage/pizza`) Menu pizza
-  a(href=`/manager/menu_manage/drink`) Menu napoje
+  div.menuManageDescript Poniżej znajdują sie serwowane przez lokal dania oraz napoje, mozesz modyfikować ich nazwy, składniki, rozmiary, ceny, oraz podać linki do zdjęć. Możesz również usuwać dania oraz dodawać nowe według zawartego formularza. Kliknij przyciski usuń, zmień oraz dodaj, aby sprawdzić jak to działa 
+  nav(class='thirdNav')
+    +item('MENU PIZZA', `/manager/menu_manage/pizza`)
+    +item('MENU NAPOJE', `/manager/menu_manage/drink`)
 
 

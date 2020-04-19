@@ -1,85 +1,99 @@
-extends ../index
+extends ../menu_manage
 block append content
-  p=title
   if(type==='addPizza')
-    div.modal#formPizza
-    a(href=`/manager/menu_manage/pizza`) x
-    form(method='post')
-      div.formPizza
-        label Nazwa: 
-        input(type='text', placeholder='Nazwa pizzy' name='name')
-      div.formPizza
-        label Rozmiary(średnice w cm): 
-        input(type='text', placeholder='mała' name='size1')
-        input(type='text', placeholder='średnia' name='size2')
-        input(type='text', placeholder='duża' name='size3')
-      div.formPizza
-        label Ceny (w złotówkach): 
-        input(type='text', placeholder='mała' name='price1')
-        input(type='text ', placeholder='średnia' name='price2')
-        input(type='text', placeholder='duża' name='price3')
-      div.formPizza
-        label Składniki(możesz dodać do 5 składników): 
-        input(type='text', placeholder='1' name='ingr1')
-        input(type='text', placeholder='2' name='ingr2' )
-        input(type='text', placeholder='3' name='ingr3' )
-        input(type='text', placeholder='4' name='ingr4')
-        input(type='text', placeholder='5' name='ingr5')
-      div.formPizza
-        label Dodaj adres URL zdjęcia: 
-        input(type='text', placeholder='adres URL' name='imgURL')
-      button(type='submit') dodaj
+    div.menuManageDescript
+      div.summaryOrder
+        a(href=`/manager/menu_manage/pizza` class='closeCross button') X
+        form(method='post' class='form')
+          div.oneSelect
+            label Nazwa: 
+            div.selectForm
+              input(type='text', placeholder='Nazwa pizzy' name='name')
+          div.oneSelect
+            label Rozmiary(średnice w cm): 
+            div.selectForm
+              input(type='text', placeholder='mała' name='size1')
+              input(type='text', placeholder='średnia' name='size2')
+              input(type='text', placeholder='duża' name='size3')
+          div.oneSelect
+            label Ceny (w złotówkach): 
+            div.selectForm
+              input(type='text', placeholder='mała' name='price1')
+              input(type='text', placeholder='średnia' name='price2')
+              input(type='text', placeholder='duża' name='price3')
+          div.oneSelect
+            label Składniki(możesz dodać do 5 składników): 
+            div.selectForm
+              input(type='text', placeholder='1' name='ingr1')
+              input(type='text', placeholder='2' name='ingr2' )
+              input(type='text', placeholder='3' name='ingr3' )
+              input(type='text', placeholder='4' name='ingr4')
+              input(type='text', placeholder='5' name='ingr5')
+          div.oneSelect
+            label Dodaj adres URL zdjęcia: 
+            input(type='text', placeholder='adres URL' name='imgURL')
+          button(type='submit' class='button top') dodaj
 
   if(type==='changePizza')
-    div.modal#formPizza
-    a(href=`/manager/menu_manage/pizza`) x
-    form(method='post')
-      div.formPizza
-        label Nazwa: 
-        input(type='text', placeholder='Nazwa pizzy' name='name' value=data.name)
-      div.formPizza
-        label Rozmiary(średnice w cm): 
-        input(type='text', placeholder='mała' name='size1' value=data.size[0])
-        input(type='text', placeholder='średnia' name='size2' value=data.size[1])
-        input(type='text', placeholder='duża' name='size3' value=data.size[2])
-      div.formPizza
-        label Ceny (w złotówkach): 
-        input(type='text', placeholder='mała' name='price1' value=data.price[0])
-        input(type='text', placeholder='średnia' name='price2' value=data.price[1])
-        input(type='text', placeholder='duża' name='proce3' value=data.price[2])
-      div.formPizza
-        label 'Składniki(możesz dodać do 5 składników)': 
-        input(type='text', placeholder='1' name='ingr1' value=data.ingredients[0])
-        input(type='text', placeholder='2' name='ingr2' value=data.ingredients[1])
-        input(type='text', placeholder='3' name='ingr3' value=data.ingredients[2])
-        input(type='text', placeholder='4' name='ingr4' value=data.ingredients[3])
-        input(type='text', placeholder='5' name='ingr5' value=data.ingredients[4]) 
-      div.formPizza
-        label Dodaj adres URL zdjęcia: 
-        input(type='text', placeholder='adres URL' name='imgURL' value=data.image)
-      button(type='submit') zmień
+    div.menuManageDescript 
+      div.summaryOrder
+        a(href=`/manager/menu_manage/pizza` class='closeCross button') X
+        form(method='post' class='form')
+          div.oneSelect
+            label Nazwa:
+            div.selectForm 
+              input(type='text', placeholder='Nazwa pizzy' name='name' value=data.name)
+          div.oneSelect
+            label Rozmiary(średnice w cm): 
+            div.selectForm
+              input(type='text', placeholder='mała' name='size1' value=data.size[0])
+              input(type='text', placeholder='średnia' name='size2' value=data.size[1])
+              input(type='text', placeholder='duża' name='size3' value=data.size[2])
+          div.oneSelect
+            label Ceny (w złotówkach): 
+            div.selectForm
+              input(type='text', placeholder='mała' name='price1' value=data.price[0])
+              input(type='text', placeholder='średnia' name='price2' value=data.price[1])
+              input(type='text', placeholder='duża' name='proce3' value=data.price[2])
+          div.oneSelect
+            label 'Składniki(możesz dodać do 5 składników)': 
+            div.selectForm
+              input(type='text', placeholder='1' name='ingr1' value=data.ingredients[0])
+              input(type='text', placeholder='2' name='ingr2' value=data.ingredients[1])
+              input(type='text', placeholder='3' name='ingr3' value=data.ingredients[2])
+              input(type='text', placeholder='4' name='ingr4' value=data.ingredients[3])
+              input(type='text', placeholder='5' name='ingr5' value=data.ingredients[4]) 
+          div.oneSelect
+            label Dodaj adres URL zdjęcia: 
+            div.selectForm
+              input(type='text', placeholder='adres URL' name='imgURL' value=data.image)
+          button(type='submit' class='button top') zmień
 
   if(type==='addDrink')
-    div.modal#formDrink
-    a(href=`/manager/menu_manage/drink`) x
-    form(method='post')
-      div.formDrink
-        label Nazwa: 
-        input(type='text', placeholder='Nazwa napoju' name='name')
-      .formDrink
-        label Rozmiary: 
-        input(type='text', placeholder='mały' name='size1')
-        input(type='text', placeholder='duży' name='size2')
-
-      div.formDrink
-        label Ceny (w złotówkach): 
-        input(type='text', placeholder='mały' name='price1')
-        input(type='text', placeholder='duży' name='price2')
-      div.formDrink
-        label Dodaj adres URL zdjęcia: 
-        input(type='text', placeholder='adres URL' name='imgURL')
-      div.formDrink
-      button(type='submit') dodaj
+    div.menuManageDescript
+      div.summaryOrder
+        a(href=`/manager/menu_manage/drink` class='closeCross button') X
+        form(method='post' class='form')
+          div.formDrink
+            label Nazwa:
+            div.selectForm 
+              input(type='text', placeholder='Nazwa napoju' name='name')
+          div.formDrink
+            label Rozmiary: 
+            div.selectForm
+              input(type='text', placeholder='mały' name='size1')
+              input(type='text', placeholder='duży' name='size2')
+          div.formDrink
+            label Ceny (w złotówkach): 
+            div.selectForm
+              input(type='text', placeholder='mały' name='price1')
+              input(type='text', placeholder='duży' name='price2')
+          div.formDrink
+            label Dodaj adres URL zdjęcia: 
+            div.selectForm
+              input(type='text', placeholder='adres URL' name='imgURL')
+          div.formDrink
+          button(type='submit' class='button top') dodaj
     
  
   

@@ -15,7 +15,7 @@ var orderSchema = new Schema({
   soucePrice:{type: String, required: true},
   ingredients:{type: Array, required: true},
   description:{type: String},
-  created:{ type: Date, default: Date.now },
+  created:{ type: String},
   impact:{type: String, required: true},
   toPay:{type: String, required: true},
   makeOrder:{type: Boolean, required: true},
