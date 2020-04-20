@@ -1,52 +1,66 @@
 extends orders_views
 
 block append content
-  p Wszystkie niezrealizowane zamówienia 
-  each val, index in data
-      div.orderpizza
-        p=index+1
-        if(val.confirmed == true)
-          p zatwierdzone
-        if(val.confirmed == false)
-          p.red niezatwierdzone 
-        if(val.confirmed == true)
+  if (title == 'Wszystkie' || title == 'Wyniki wyszukiwania')
+    form( class='form' method='post')
+        p.summaryType wpisz numer zamówinie i kliknij wyszukaj aby znaleźć konkretne zamówienie
+        div.form-row
+            div.passwordRow
+              input(type='text' name='search')
+              input(class='button' type='submit' value='Wyszukaj')
+  if(data.length == 0)
+    div.attention brak danych wyników wyszukiwania 
+  else
+    each val, index in data
+      div.listElement
+        p(class='bold')=index+1+'.'
         span Numer zamówienia: 
-        span=val.id.substr(20)
-        br
+        span(class='bold')=val.id.substr(20)
+        br  
         span Data i godzina zamówienia: 
-        span=val.created
-        div
+        span(class='bold')=val.created
+        div.summaryType
         each valIn, indexIn in val.pizza  
           span=indexIn+1+') '
-          span  pizza: 
           span=valIn+', ' 
-          span  rozmiar:  
           span=val.pizzaSize[indexIn]+' cm, '
-          span  cena:  
           span=val.pizzaPrice[indexIn]+' zł'
           br
-        div
-          each valIn, indexIn in val.drink
+        div.summaryType
+        each valIn, indexIn in val.drink
+          if(valIn !== '')
             span=indexIn+1+') '
-            span  napój: 
-            span=valIn+', ' 
-            span  rozmiar:  
-            span=val.drinkSize[indexIn]+', '
-            span  cena:  
+            span=valIn+', '  
+            span=val.drinkSize[indexIn]+', ' 
             span=val.drinkPrice[indexIn]+' zł'
             br
         div
           span dopłata za sosy: 
-          span=val.soucePrice + " zł" 
-        div
-          span Miejsce wydania: 
-          span=val.impact
-        div
+          span(class='bold')=val.soucePrice + " zł" 
+          br 
           span do zapłaty: 
-          span=val.toPay + " zł"   
-          if(title == 'Wszystkie')
-            a(href=`/manager/order_views/all/delete/${val.id}`) Usuń      
+          span(class='bold')=val.toPay + " zł"
+        div.summaryType 
+          if(title == 'Wszystkie' || title == 'Wyniki wyszukiwania')
+            if val.confirmed
+              p.bold zatwierdzone
+            if !val.confirmed
+              p(class ='bold red') niezatwierdzone 
+            if val.paidOrder
+              p.bold zapłacone
+            if !val.paidOrder
+              p(class='bold red') niezapłacone
+            if val.serveOrder
+              p.bold wydane
+            if !val.serveOrder
+              p(class='bold red') niewydane
+            div.summaryType 
+              a(href=`/manager/order_views/all/delete/${val.id}` class='button') Usuń      
           if(title == 'Niezatwierdzone')
-            a(href=`/manager/order_views/unconfirmed/delete/${val.id}`) Usuń   
+            div.summaryType 
+              a(href=`/manager/order_views/unconfirmed/delete/${val.id}` class='button') Usuń   
           if(title == 'Niezapłacone')
-            a(href=`/manager/order_views/unpaid/delete/${val.id}`) Usuń   
+            div.summaryType 
+              a(href=`/manager/order_views/unpaid/delete/${val.id}` class='button pay') Usuń  
+              a(href=`/manager/order_views/unpaid/change/${val.id}` class='button') Zapłacone 
+        hr

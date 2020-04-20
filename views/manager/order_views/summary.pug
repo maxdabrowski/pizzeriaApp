@@ -1,27 +1,30 @@
 extends orders_views
 
 block append content
-  p summary 
-  each val, index in tabPizza
-    div
-      span=index+1        
-      span  pizza: 
-      span=val[0] 
-      span  rozmiar:  
-      span=val[1]
-      span  cena:  
-      span=val[2]  
-  p=pizzaSum
-  each val, index in tabDrink
-    div
-      span=index+1        
-      span  napój: 
-      span=val[0] 
-      span  rozmiar:  
-      span=val[1]
-      span  cena:  
-      span=val[2]  
-  p=drinkSum
-    div
-     span sosy:
-     span=sauceSum
+  p.summaryType wyniki wyszukiwania dla xxxxx - xxxxxx
+  table.summaryType 
+    each val, index in tabPizza
+      tr
+        td=index+1+'.'      
+        td=val[0]  
+        td=val[1]+'cm'
+        td=val[2]+'zł'
+  div.summaryType 
+    span suma pizza:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    span(class='bold ')=pizzaSum + 'zł'
+  table.summaryType 
+    each val, index in tabDrink
+      tr
+        td=index+1 +'.'         
+        td=val[0]  
+        td=val[1]
+        td=val[2] +'zł'
+  div.summaryType  
+    span suma napoje: 
+    span(class='bold')=drinkSum + 'zł'
+  div.summaryType 
+    span suma sosy: 
+    span(class='bold')=sauceSum + 'zł'
+  div.summaryType
+    span SUMA DO ZAPŁATY:
+    span(class='bold')=allSum +'zł'

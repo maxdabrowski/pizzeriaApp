@@ -15,7 +15,6 @@ main{
 
 /*style dla formularza*/
 .form {
-  /*width: 80%;*/
   margin:0 auto;
 }
 
@@ -40,21 +39,20 @@ width:30%;
 margin-right:10px;
 }
 
-.form input:focus
-{
+.form input:focus{
   border-color:#9DC9F5;
   box-shadow:inset 0 0 0 1px #9DC9F5, inset 0 1px 5px rgba(0,0,0,0.07);
   outline:none;
 }
 
-.form label {
+.form label{
   font-weight:bold;
   display: block;
   font-size:0.9rem;
   margin-bottom:0.5rem;
 }
 
-.button {
+.button{
   background: #7c7c7c;
   border:0;
   padding:0.5rem;
@@ -66,7 +64,7 @@ margin-right:10px;
   vertical-align: middle; 
   text-align:center;
 }
-.button:hover {
+.button:hover{
   background:  #A21310;
 }
 
@@ -98,7 +96,7 @@ textarea{
   margin:0 0 auto;
 }
 
-.secondNav a:hover {
+.secondNav a:hover{
   color: #c6342e;
   border-bottom: 1px solid #c6342e ;
 }
@@ -132,6 +130,7 @@ textarea{
 .selectFormParent{
   margin-top: 20px;
 }
+
 .formSubmit{
   float:right
 }
@@ -157,9 +156,11 @@ textarea{
   Width:33%;
   display: flex;
 }
+
 .bold{
   font-weight: bold;
 }
+
 .closeCross{
   position:relative;
   bottom: 18px;
@@ -168,30 +169,38 @@ textarea{
   width: 30px;
   height: 30px;
 }
+
 .pay{
   margin-right:30px;
 }
+
 .attention{
   margin-top: 100px;
   text-align: center;
   color:  #c6342e;
   font-style: italic;
 }
+
 p{
   margin: 0px;
 }
+
 .red{
   color: #c6342e;
 }
+
 .managerNav a{
   width: 50%;
 }
+
 .menuManageDescript{
   padding-top:70px;
 }
+
 .thirdNav{
   width: 100%;
 }
+
 .thirdNav a{
   text-align: center;
   display: block;
@@ -204,9 +213,24 @@ p{
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 .thirdNav a:hover{
   color: #c6342e;
 }
+
 .top{
   margin-top: 10px;
 }
+
+.ordeView a{
+  width:25%
+}
+
+td{
+  padding-right: 20px;
+}
+
+.error{
+  text-align: center;
+}
+

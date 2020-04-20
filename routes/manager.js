@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/menu_manage', (req,res) =>{ 
   Pizza.find({}, (err,data)=>{
     res.render('manager/menu_manage', {title: 'Zarządzanie menu', data})
-  });9+
+  });
 });
 
   //renderowanie zakładki sprawdż zamówienia
@@ -50,16 +50,28 @@ router.get('/menu_manage/pizza/add', (req,res) =>{
 
   // dodawanie nowe pizzy
 router.post('/menu_manage/pizza/add', (req,res) =>{
-console.log(req.body)
   const name = req.body.name;
   const {ingr1, ingr2,ingr3,ingr4,ingr5} = req.body;
   const {size1, size2,size3} = req.body;
   const {price1, price2,price3} = req.body;
   const url = req.body.imgURL;
 
+  let ingredientsTab = [];
+  if(ingr1 !== ''){
+    ingredientsTab.push(ingr1)
+  }if(ingr2 !== ''){
+    ingredientsTab.push(ingr2)
+  }if(ingr3 !== ''){
+    ingredientsTab.push(ingr3)
+  }if(ingr4 !== ''){
+    ingredientsTab.push(ingr4)
+  }if(ingr5 !== ''){
+    ingredientsTab.push(ingr5)
+  }
+
   const pizzaData = new Pizza({
     name: name,
-    ingredients: [ingr1,ingr2,ingr3,ingr4,ingr5],
+    ingredients: ingredientsTab,
     size:[size1,size2,size3],
     price: [price1,price2,price3],  
     image: url,
@@ -97,9 +109,22 @@ router.post('/menu_manage/pizza/change/:id', (req,res) =>{
   const {price1, price2,price3} = req.body;
   const url = req.body.imgURL;
 
+  let ingredientsTab = [];
+  if(ingr1 !== ''){
+    ingredientsTab.push(ingr1)
+  }if(ingr2 !== ''){
+    ingredientsTab.push(ingr2)
+  }if(ingr3 !== ''){
+    ingredientsTab.push(ingr3)
+  }if(ingr4 !== ''){
+    ingredientsTab.push(ingr4)
+  }if(ingr5 !== ''){
+    ingredientsTab.push(ingr5)
+  }
+
   Pizza.findByIdAndUpdate(req.params.id, 
     {name: name,
-    ingredients: [ingr1,ingr2,ingr3,ingr4,ingr5],
+    ingredients: ingredientsTab,
     size:[size1,size2,size3],
     price: [price1,price2,price3],  
     image: url}, ()=>{
@@ -164,6 +189,21 @@ router.get('/order_views/all', (req, res) => {
   })
 });
 
+router.post('/order_views/all', (req, res) => {
+  Order.find({},(err,data)=>{
+    let dataSearch =[];
+    data.forEach(el =>{
+      if(el.id.substr(20).indexOf(req.body.search) !== -1){
+        dataSearch.push(el)
+      }
+    })
+    data  = dataSearch ;
+    res.render('manager/order_views/all', { title: 'Wyniki wyszukiwania',data});
+  })
+});
+
+
+
 router.get('/order_views/unconfirmed', (req, res) => {
   Order.find({confirmed:false},(err,data)=>{
     res.render('manager/order_views/all', { title: 'Niezatwierdzone',data});
@@ -197,6 +237,14 @@ router.get('/order_views/unpaid/delete/:id', (req,res) =>{
   })
   Order.find({paidOrder:false}, (err,data)=>{
     res.render('manager/order_views/all', {title: 'Niezapłacone', data})
+  });
+});
+
+router.get('/order_views/unpaid/change/:id', (req,res) =>{
+  Order.findByIdAndUpdate(req.params.id,{paidOrder:true}, ()=>{
+    Order.find({paidOrder:false}, (err,data)=>{
+      res.render('manager/order_views/all', {title: 'Niezapłacone', data})
+    });
   });
 });
 
@@ -242,7 +290,9 @@ router.get('/order_views/summary', (req, res) => {
       sauceSum += parseInt(el.soucePrice);
     }
 
-    res.render('manager/order_views/summary', { title: 'Podsumowanie', tabPizza, pizzaSum, tabDrink, drinkSum, sauceSum });
+    let allSum = pizzaSum + drinkSum + sauceSum;
+
+    res.render('manager/order_views/summary', { title: 'Podsumowanie', tabPizza, pizzaSum, tabDrink, drinkSum, sauceSum, allSum });
   })
 });
 

@@ -92,3 +92,28 @@ a{
   margin-bottom:20px;
 }
 
+/*dodanie styli i responsywności na tablet*/
+@media (max-width:1400px){
+  .app{
+    width:80%;
+    margin: auto;
+  }
+  
+  .img{
+    width:100px;
+  }
+  .tittleDescription{
+    font-size: 60px;
+    height:100px;
+    width:70%;
+    position: relative;
+    float: right;
+  }
+  
+  .tittleDescription p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%,-50%) 
+  }
+}
