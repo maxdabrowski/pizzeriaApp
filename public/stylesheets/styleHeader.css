@@ -93,27 +93,55 @@ a{
 }
 
 /*dodanie styli i responsywności na tablet*/
-@media (max-width:1400px){
+@media  only screen and (max-width:1440px){
   .app{
     width:80%;
     margin: auto;
   }
-  
+}
+
+@media  only screen and (max-width:1024px){
+  .app{
+    width:100%;
+    margin: auto;
+  }
   .img{
-    width:100px;
+    width: 200px;
   }
   .tittleDescription{
-    font-size: 60px;
-    height:100px;
-    width:70%;
-    position: relative;
-    float: right;
-  }
-  
-  .tittleDescription p {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0%,-50%) 
+    font-size:80px;
+    width:60%;
   }
 }
+
+@media  only screen and (max-width:768px){
+  .app{
+    width:100%;
+    margin: auto;
+  }
+  .img{
+    width: 0px;
+  }
+  .tittleDescription{
+    margin: 0 auto;
+    font-size:60px;
+    width:100%;
+    height: 100px;
+  }
+  .tittleDescription p {
+    position: relative;
+    top: 0px;
+    transform: none;
+    text-align: center;
+  }
+  .nav a{
+    width: 100%
+  }
+  .ph-line-nav .effect {
+    background: white;
+  }
+  .cat{
+    width:100%
+  }
+}
+ 

@@ -122,8 +122,8 @@ textarea{
 }
 
 .delete{
-  position:relative;
-  top: -30px;
+  position:static;
+  top: 0px;
   left:62%;
 }
 
@@ -234,3 +234,88 @@ td{
   text-align: center;
 }
 
+@media (max-width:1024px){
+  .secondNav a{
+    font-size: 15px;
+  }
+  .thirdNav a{
+    font-size: 15px;
+  }
+  main{
+    font-size: 15px;
+  }
+  .button{
+    font-size:0.7rem;
+  }
+  .closeCross{
+    width: 15px;
+    height: 15px;
+    left:98%;
+  }
+}
+
+@media (max-width:768px){
+  .secondNav a{
+    font-size: 15px;
+    width: 100%;
+  }
+  .thirdNav a{
+    font-size: 15px;
+    width: 100%;
+  }
+  main{
+    font-size: 15px;
+    margin: 0 auto;
+    text-align:center;
+  }
+  .button{
+    font-size:0.7rem;
+  }
+  .closeCross{
+    width: 15px;
+    height: 15px;
+    left:98%;
+  }
+  .selectForm{
+    display: block;
+  }
+  .form input[type=password],
+  .form input[type=text],
+  .form input[type=number],
+  .form select
+  {
+    border-radius:0.2rem;
+    padding:0.3rem;
+    width:100%;
+    margin-right:0px;
+  }
+  select,
+  input{
+    margin-bottom: 10px;
+  }
+  .delete{
+    position:static;
+  }
+  .oneSelect{
+    margin-bottom: 20px;
+  }
+  .summaryItem{
+    display: block;
+  }
+  .summaryDescript{
+    Width:100%;
+    display: block;
+  }
+  .summaryType span{
+    display: block;
+  }
+  .listElement span{
+    display: block;
+  }
+  .closeCross{
+    left:95%;
+  }
+  .menuManageDescript{
+    padding-top:100px;
+  }
+}

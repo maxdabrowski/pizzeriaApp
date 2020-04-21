@@ -14,15 +14,15 @@ block content
         span Data i godzina zamówienia: 
         span(class='bold')=val.created        
         div.summaryType
-        each valIn, indexIn in data[index].pizza  
-          span=indexIn+1+') '
-          span  pizza: 
-          span(class='bold')=valIn+', ' 
-          span  rozmiar:  
-          span(class='bold')=data[index].pizzaSize[indexIn]+ 'cm, '
-          span  składniki:  
-          span(class='bold')=data[index].ingredients[indexIn]
-          br
+          each valIn, indexIn in data[index].pizza  
+            span=indexIn+1+') '
+            span  pizza: 
+            span(class='bold')=valIn+', ' 
+            span  rozmiar:  
+            span(class='bold')=data[index].pizzaSize[indexIn]+ 'cm, '
+            span  składniki:  
+            span(class='bold')=data[index].ingredients[indexIn]
+            br
         div.summaryType
           span dodatkowe informacje: 
           span(class='red bold')=data[index].description 
