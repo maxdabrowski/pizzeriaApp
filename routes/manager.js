@@ -296,4 +296,168 @@ router.get('/order_views/summary', (req, res) => {
   })
 });
 
+
+//zwracanie danych dla dat podanych w kalendarzu 
+router.post('/order_views/summary', (req, res) => {
+
+  //daty z formularza
+  let dataStart = req.body.dataStart;
+  let dataStop = req.body.dataStop;
+
+  // deklaracja zmiennych
+  let dataStartDate = 0;
+  let dataStopDate = 0;
+
+  //data start i stopu do sprawdzenia która data jest większa
+  let dataStartDateCheck = 0;
+  let dataStopDateCheck= 0;
+
+  //poszczególne elementy daty Start
+  let dayDataStart = 0;
+  let monthDataStart = 0;
+  let yearDataStart = 0;
+
+  //poszczegolne elementy daty Stop
+  let dayDataStop = 0;
+  let monthDataStop = 0;
+  let yearDataStop = 0;
+
+  //daty startu i stopu do wysłania na widok w formie String
+  let dataStartView = ''; 
+  let dataStopView ='' ; 
+
+  //przyadek gdy obydwa pola nie są puste
+  if(dataStart !== '' && dataStop !== '' ){
+
+    //wyciągnięce poszczgólnych liczb daty z danych przysłanych
+    dayDataStart = parseInt(dataStart.substr(0,2));
+    monthDataStart = parseInt(dataStart.substr(3,2)) - 1;
+    yearDataStart = parseInt(dataStart.substr(6,4));
+
+    dayDataStop = parseInt(dataStop.substr(0,2));
+    monthDataStop = parseInt(dataStop.substr(3,2)) - 1;
+    yearDataStop = parseInt(dataStop.substr(6,4));
+
+    //daty rozpoczecia i zakończenia w formacie daty 
+    dataStartDateCheck = new Date(yearDataStart,monthDataStart,dayDataStart,0,0,0,0);
+    dataStopDateCheck = new Date(yearDataStop,monthDataStop,dayDataStop,23,59,59,59);
+
+      //sprawdzneie czy data początku nie jest większa niż data końca, jeżeli jest to zamieniamy je 
+      if(dataStartDateCheck > dataStopDateCheck ){
+        dataStartDate = new Date(yearDataStop,monthDataStop,dayDataStop,0,0,0,0);
+        dataStopDate = new Date(yearDataStart,monthDataStart,dayDataStart,23,59,59,59);
+
+        dataStartView = dataStop;
+        dataStopView = dataStart;
+
+      }else{
+        dataStartDate = new Date(yearDataStart,monthDataStart,dayDataStart,0,0,0,0);
+        dataStopDate = new Date(yearDataStop,monthDataStop,dayDataStop,23,59,59,59);
+
+        dataStartView = dataStart;
+        dataStopView =dataStop;
+      }
+  }
+
+  // przypadek, gdy pole dataStop jest puste
+  if(dataStart !== '' && dataStop == '' ){
+    dayDataStart = parseInt(dataStart.substr(0,2));
+    monthDataStart = parseInt(dataStart.substr(3,2)) - 1;
+    yearDataStart = parseInt(dataStart.substr(6,4));
+
+      //przypisanie dat startu i stopu dla jednego dnia, lecz inne godziny
+      dataStartDate = new Date(yearDataStart,monthDataStart,dayDataStart,0,0,0,0);
+      dataStopDate = new Date(yearDataStart,monthDataStart,dayDataStart,23,59,59,59);
+
+      dataStartView = dataStart;
+      dataStopView = dataStart;
+  }
+
+  // przypadek, gdy pole dataStart jest puste
+  if(dataStart == '' && dataStop !== '' ){
+    dayDataStop = parseInt(dataStop.substr(0,2));
+    monthDataStop = parseInt(dataStop.substr(3,2)) - 1;
+    yearDataStop = parseInt(dataStop.substr(6,4));
+
+    //przypisanie dat startu i stopu dla jednego dnia, lecz inne godziny
+      dataStartDate = new Date(yearDataStop,monthDataStop,dayDataStop,0,0,0,0);
+      dataStopDate = new Date(yearDataStop,monthDataStop,dayDataStop,23,59,59,59);
+
+      dataStartView = dataStop;
+      dataStopView = dataStop;
+  }
+
+  // przypadek, gdy oba pola są puste
+  if(dataStart == '' && dataStop == '' ){
+    //data Startu ustawiona na 1.04.2020
+    dataStartDate = new Date(2020,3,1,0,0,0,0);
+    
+    const dateNow = new Date();
+    const year = dateNow.getFullYear();
+    let month = dateNow.getMonth()
+    let day = dateNow.getDate();
+
+    //data Stopu ustawiona na datę dzisiejszą
+    dataStartDate = new Date(2020,3,1,0,0,0,0);
+    dataStopDate = new Date(year,month,day,23,59,59,59);
+
+    dataStartView = 'wszystkie daty';
+    dataStopView = 'wszystkie daty';
+  }
+  
+  //ustawienia dat startu i stopu w formacie liczbowym 
+  const dataStartTime= dataStartDate.getTime();
+  const dataStopTime= dataStopDate.getTime();
+
+  Order.find({confirmed: true, paidOrder: true, dataNumber:{$gte:dataStartTime}, dataNumber:{$lte:dataStopTime}},(err,data)=>{
+    
+    //tabele pizzy drink i obecna
+    let tabPizza = [];
+    let tabDrink = [];
+    let current = [];
+
+
+    data.forEach(el => {
+      //wyciągnięcia poszczególnych zamówionych pizzy
+      el.pizza.forEach((e, index) =>{
+        current.push(e);
+        current.push(el.pizzaSize[index])
+        current.push(el.pizzaPrice[index])
+        tabPizza.push(current)
+        current = []; 
+      })
+
+      //wyciągnięcie poszczególnych zamówień napojów
+      el.drink.forEach((elem, index) =>{
+        if(elem !== ''){
+          current.push(elem);
+          current.push(el.drinkSize[index])
+          current.push(el.drinkPrice[index])
+          tabDrink.push(current)
+          current = []; 
+        }
+      })
+    })
+    
+    // obliczanie sumy cen 
+    let pizzaSum = 0;
+    let drinkSum = 0;
+    let sauceSum = 0;
+
+    for (const el of tabPizza){
+      pizzaSum += parseInt(el[2]);
+    }
+    for (const el of tabDrink){
+      drinkSum += parseInt(el[2]);
+    }
+    for (const el of data){
+      sauceSum += parseInt(el.soucePrice);
+    }
+
+    let allSum = pizzaSum + drinkSum + sauceSum;
+
+    res.render('manager/order_views/summary', { title: 'Podsumowanie wybór dat', tabPizza, pizzaSum, tabDrink, drinkSum, sauceSum, allSum, dataStartView, dataStopView });
+  })
+});
+
 module.exports = router;

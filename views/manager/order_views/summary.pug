@@ -1,7 +1,19 @@
 extends orders_views
 
 block append content
-  p.summaryType wyniki wyszukiwania dla xxxxx - xxxxxx
+  div.calender
+    form(method="post" class='form')
+      div.oneSelect
+        label Podaj datę od do: 
+          div(class='selectForm calendarForm')
+            input(type='text' id='datepicker' name='dataStart' readonly required)
+            input(type='text' id='datepicker2' name='dataStop' readonly required)
+            input(type="submit" class='button')
+  if(title == 'Podsumowanie wybór dat')
+    span.summaryType wyniki wyszukiwania dla 
+    span.bold=dataStartView
+    span.bold - 
+    span.bold=dataStopView
   table.summaryType 
     each val, index in tabPizza
       tr

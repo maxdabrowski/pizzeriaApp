@@ -95,6 +95,7 @@ router.post('/order', (req, res) => {
       //ustawienie daty zamówienia 
       const dateNow = new Date();
       const year = dateNow.getFullYear();
+      const dataNumber = dateNow.getTime();
       let month = dateNow.getMonth()+1;
       let day = dateNow.getDate();
       let hour = dateNow.getHours();
@@ -137,6 +138,7 @@ router.post('/order', (req, res) => {
         serveOrder: false,
         confirmed: false,
         created: dateFormat,
+        dataNumber:dataNumber
       });
 
       //zapisywanie do bazy

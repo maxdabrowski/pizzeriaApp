@@ -122,9 +122,9 @@ textarea{
 }
 
 .delete{
-  position:static;
-  top: 0px;
-  left:62%;
+  position:relative !important;
+  top: -30px !important;
+  left:62% !important;
 }
 
 .selectFormParent{
@@ -233,6 +233,20 @@ td{
 .error{
   text-align: center;
 }
+.calendarForm{
+  display: flex;
+}
+
+.calendarForm input{
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+.passwordRow input{
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+}
+
+
 
 @media (max-width:1024px){
   .secondNav a{
@@ -293,9 +307,6 @@ td{
   input{
     margin-bottom: 10px;
   }
-  .delete{
-    position:static;
-  }
   .oneSelect{
     margin-bottom: 20px;
   }
@@ -317,5 +328,9 @@ td{
   }
   .menuManageDescript{
     padding-top:100px;
+  }
+  .calendarForm input{
+    margin-bottom: 10px !important;
+
   }
 }
