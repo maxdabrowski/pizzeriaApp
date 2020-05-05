@@ -98,7 +98,7 @@ router.post('/order', (req, res) => {
       const dataNumber = dateNow.getTime();
       let month = dateNow.getMonth()+1;
       let day = dateNow.getDate();
-      let hour = dateNow.getHours();
+      let hour = dateNow.getHours()+2;
       let minute = dateNow.getMinutes()+1;
   
       if(month <10){
@@ -165,7 +165,6 @@ router.get('/order/paid/:id', (req, res) => {
 router.get('/order/addOrder/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {confirmed:true}, ()=>{
-      //zmienić ścieżkę na taką jaka bedzie do hostowania za localhosta
       res.redirect('https://cessarepizza.herokuapp.com//staff/prepared')
     });
 });
