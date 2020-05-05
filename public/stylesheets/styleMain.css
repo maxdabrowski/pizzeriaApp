@@ -122,9 +122,9 @@ textarea{
 }
 
 .delete{
-  position:relative !important;
-  top: -30px !important;
-  left:62% !important;
+  position:relative;
+  top: -30px;
+  left:62% ;
 }
 
 .selectFormParent{
