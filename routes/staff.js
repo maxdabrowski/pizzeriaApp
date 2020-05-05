@@ -165,7 +165,7 @@ router.get('/order/paid/:id', (req, res) => {
 router.get('/order/addOrder/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {confirmed:true}, ()=>{
-      res.redirect('https://cessarepizza.herokuapp.com//staff/prepared')
+      res.redirect('https://cessarepizza.herokuapp.com/staff/prepared')
     });
 });
 
