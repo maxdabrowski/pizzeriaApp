@@ -166,7 +166,7 @@ router.get('/order/addOrder/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {confirmed:true}, ()=>{
       //zmienić ścieżkę na taką jaka bedzie do hostowania za localhosta
-      res.redirect('http://localhost:3000/staff/prepared')
+      res.redirect('https://cessarepizza.herokuapp.com//staff/prepared')
     });
 });
 
