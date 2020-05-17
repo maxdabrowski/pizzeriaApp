@@ -16,4 +16,28 @@ router.get('/drink', (req, res) => {
   })
 })
 
+
+//obsługa Api dla reacta......................................
+
+router.post('/react', (req, res) => {
+
+  console.log(req.body);
+  res.send(`przysłane Body ${req.body.post}`)
+});
+
+router.get('/react', (req, res) => {
+
+  res.send({express:'Hello From Express'})
+});
+
+
+//....................................................................................................
+
+
+
+
+
+
+
+
 module.exports = router;

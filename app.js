@@ -17,7 +17,7 @@ var mainRouter = require('./routes/main');
 var staffRouter = require('./routes/staff');
 var kitchenRouter = require('./routes/kitchen');
 var managerRouter = require('./routes/manager');
-var menuRouter = require('./routes/menu');
+var apiRouter = require('./routes/api');
 
 
 
@@ -54,7 +54,7 @@ app.use('/staff', staffRouter);
 app.use('/kitchen', kitchenRouter);
 app.use('/manager', managerRouter);
 app.use('/manager/menu_manage', managerRouter);
-app.use('/menu', menuRouter);
+app.use('/API', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

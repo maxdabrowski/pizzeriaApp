@@ -151,7 +151,6 @@ router.post('/order', (req, res) => {
   });
 });
 
-
 router.get('/order/paid/:id', (req, res) => {
   Order.findByIdAndUpdate(req.params.id, 
     {paidOrder:true}, ()=>{
