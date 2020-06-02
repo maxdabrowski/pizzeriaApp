@@ -23,6 +23,7 @@ var orderSchema = new Schema({
   paidOrder:{type: Boolean, required: true},
   confirmed:{type: Boolean, required: true}, 
   serveOrder:{type: Boolean, required: true},
+  user:{type: String},
   telNumber:{type: String},
   adress:{type: String},
 });

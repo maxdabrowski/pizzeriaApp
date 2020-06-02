@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 
 mongoose.connect(config.db, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', false);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection erroe:'));
