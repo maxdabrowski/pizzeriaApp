@@ -213,7 +213,7 @@ router.get('/ready/changeReadyLocal/:id', (req, res) => {
 
 //renderowanie gotowych zamówień zamówionych na wynos 
 router.get('/ready/takeaway', (req, res) => {
-  Order.find({confirmed: true, makeOrder: true, impact: 'takeaway'},(err,data)=>{
+  Order.find({confirmed: true, makeOrder: true, impact: 'takeaway', serveOrder:false},(err,data)=>{
     console.log(data)
     res.render('order/orders', { title: 'Gotowe na wynos', type:'readyTakeaway', data});
   })

@@ -28,7 +28,10 @@ block content
           span(class='red bold')=data[index].description 
         div.summaryType
           span miejsce wydania: 
-          span(class='bold')=data[index].impact  
+          if(data[index].impact==='takeaway')
+            span(class='bold') na wynos 
+          if( data[index].impact==="lokal")
+            span(class='bold') lokal 
         div.summaryType        
           a(href=`/kitchen/change/${data[index].id}` class='button') Wykonano
         hr

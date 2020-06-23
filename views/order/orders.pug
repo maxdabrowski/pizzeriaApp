@@ -37,10 +37,20 @@ block append content
                 br
         div
           span Miejsce wydania: 
-          span=val.impact
+            if(val.impact==='takeaway')
+              span na wynos
+            if(val.impact==='lokal')
+              span lokal     
         div.summaryType
           span do zapłaty: 
-          span(class='bold')=val.toPay + " zł"    
+          span(class='bold')=val.toPay + " zł" 
+        if(type==='readyTakeaway')
+          div.summaryType
+            span Adres dostawy: 
+            span=val.adress
+          div.summaryType
+            span Telefon klienta: 
+            span=val.telNumber  
         if(type==='unpaid')
           div.summaryType
             a(href=`/staff/unpaid/change/${val.id}` class='button') Zapłać

@@ -93,14 +93,14 @@ a{
 }
 
 /*dodanie styli i responsywności na tablet*/
-@media  only screen and (max-width:1440px){
+@media (max-width:1440px){
   .app{
     width:80%;
     margin: auto;
   }
 }
 
-@media  only screen and (max-width:1024px){
+@media(max-width:1024px){
   .app{
     width:100%;
     margin: auto;
@@ -114,7 +114,7 @@ a{
   }
 }
 
-@media  only screen and (max-width:768px){
+@media(max-width:768px){
   .app{
     width:100%;
     margin: auto;

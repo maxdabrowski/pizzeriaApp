@@ -4,19 +4,37 @@ const Pizza = require('../models/pizza');
 const Drink = require('../models/drink');
 const User = require('../models/user');
 const Order = require('../models/order');
+const Opinion = require('../models/opinion');
+const Vote = require('../models/vote');
 
 // zapytnaie zwracające pizze w formacie json
 router.get('/pizza', (req, res) => {
   Pizza.find({}, (err,data)=>{
       res.json(data)
-    })
+    });
   });
+
 //zapytnie zwracające napoje w formacie json
 router.get('/drink', (req, res) => {
   Drink.find({}, (err,data)=>{
     res.json(data)
-  })
-})
+  });
+});
+
+//zapytnie opinii napoje w formacie json
+router.get('/opinion', (req, res) => {
+  Opinion.find({}, (err,data)=>{
+    res.json(data)
+  });
+});
+
+//zapytanie o głosy
+router.get('/vote', (req, res) => {
+  Vote.find({}, (err,data)=>{
+    res.json(data)
+  });
+});
+
 
 
 //sprawdzanie czy dany użytkonik już istnieje
@@ -32,7 +50,7 @@ router.post('/user_check', (req, res) => {
 });
 
 
-//dodanie/zmiana danych użytkonika
+//dodanie, zmiana danych użytkonika
 router.post('/user', (req, res) => {
   const user = req.body.userToSend; 
 
@@ -41,7 +59,8 @@ router.post('/user', (req, res) => {
     const newUser = new User(user);
     newUser.save(()=>{
       User.find({_id: newUser.id}, (err,data)=>{
-        res.send(data)
+        console.log(data)
+        res.send({error: 'none', orders:[] , user:data })
       });
     });
   };
@@ -59,7 +78,9 @@ router.post('/user', (req, res) => {
       mail: user.mail,
       type: user.type}, ()=>{
         User.find({name: user.name}, (err,data)=>{
-          res.send(data)
+          Order.find({user: data[0]._id}, (err,orderData)=>{ 
+            res.send({error: 'none', orders:orderData , user:data })
+          });
         });
     });
   };
@@ -67,10 +88,8 @@ router.post('/user', (req, res) => {
 
 //usuwanie użytkownika
 router.post('/user_delete', (req, res) => {
-  console.log(req.body);
 
-  User.findByIdAndDelete(req.body.id, (error)=>{
-  });
+  User.findByIdAndDelete(req.body.id, (error)=>{});
 
   User.find({_id: req.body.id}, (err,data)=>{
     if(data.length  == 0){
@@ -88,10 +107,10 @@ router.post('/login_user', (req, res) => {
   const password = req.body.password.trim();
 
       User.find({name: name}, (err,userData)=>{ 
-        const userId = userData[0]._id;
         if(userData.length  == 0){
           res.send({error:'nameError'})       
         }else{
+          const userId = userData[0]._id;
           if(userData[0].password === password){
 
             Order.find({user: userId}, (err,orderData)=>{ 
@@ -105,6 +124,7 @@ router.post('/login_user', (req, res) => {
     });
 });
 
+//dodawanie nowego zamówienia
 router.post('/order', (req, res) => {
 
   const pizzaArrayReq = req.body.order.pizzaOrder;
@@ -197,7 +217,7 @@ router.post('/order', (req, res) => {
       const dateFormat = day+'.'+month+'.'+year + ' godz. ' + hour + ':' + minute
 
       //tworzenie nowego zamówienia
-      const orderData = new Order({
+      const orderData = new Order({ 
         customers: customer,
         table: '',
         pizza: pizzaArray,
@@ -216,7 +236,7 @@ router.post('/order', (req, res) => {
         makeOrder: false,
         paidOrder: false,
         serveOrder: false,
-        confirmed: false,
+        confirmed: true,
         created: dateFormat,
         dataNumber:dataNumber,
         user: userId,
@@ -229,6 +249,66 @@ router.post('/order', (req, res) => {
           res.send({error:'none', orders:orderData})
         });
       });
+    });
+  });
+});
+
+router.post('/send_opinion', (req, res) => {
+  const opinion = req.body; 
+
+  //ustawienie daty zamówienia 
+  const dateNow = new Date();
+  const year = dateNow.getFullYear();
+  let month = dateNow.getMonth()+1;
+  let day = dateNow.getDate();
+  let hour = dateNow.getHours()+2;
+  let minute = dateNow.getMinutes()+1;
+
+  if(month <10){
+    month = '0'+month
+  }
+  if(day <10){
+    day = '0'+day
+  }
+  if(hour <10){
+    hour = '0'+hour
+  }
+  if(minute <10){
+    minute = '0'+minute
+  }
+
+  const dateFormat = day+'.'+month+'.'+ year + ' godz. ' + hour + ':' + minute
+
+  //dodanie nawej opini
+    const newOpinion = new Opinion({
+      opinion: opinion.opinion,
+      userName: opinion.userName,
+      userId: opinion.userId,
+      data: dateFormat
+    });
+    
+    newOpinion.save(()=>{
+      Opinion.find({}, (err,data)=>{
+        res.send(data)
+      });
+    });
+});
+
+//oddanie głosu
+router.post('/vote', (req, res) => {
+  Vote.find({}, (err,data)=>{
+    const newNumberVotes = data[0].numberVotes + 1;
+    const newSumVotes = data[0].sumVotes + req.body.vote;
+    const averageVote = newSumVotes/newNumberVotes;
+
+    const votes = {
+      numberVotes: newNumberVotes,
+      averageVotes: averageVote,
+    };
+
+    Vote.findByIdAndUpdate(data[0]._id,
+      {numberVotes:newNumberVotes, sumVotes: newSumVotes, averageVotes: averageVote  }, ()=>{
+      res.send(votes)
     });
   });
 });
