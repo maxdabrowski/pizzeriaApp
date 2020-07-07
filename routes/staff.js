@@ -118,7 +118,6 @@ router.post('/order', (req, res) => {
 
       //tworzenie szablonu zamówienia do zapisania do bazy 
       const orderData = new Order({
-        customers: req.body.customers,
         table: req.body.tableNumber,
         pizza: req.body.pizza,
         pizzaSize: pizzaSizeArray,

@@ -29,9 +29,6 @@ block append content
               input(type='text', placeholder='3' name='ingr3' )
               input(type='text', placeholder='4' name='ingr4')
               input(type='text', placeholder='5' name='ingr5')
-          div.oneSelect
-            label Dodaj adres URL zdjęcia: 
-            input(type='text', placeholder='adres URL' name='imgURL')
           button(type='submit' class='button top') dodaj
 
   if(type==='changePizza')
@@ -63,10 +60,6 @@ block append content
               input(type='text', placeholder='3' name='ingr3' value=data.ingredients[2])
               input(type='text', placeholder='4' name='ingr4' value=data.ingredients[3])
               input(type='text', placeholder='5' name='ingr5' value=data.ingredients[4]) 
-          div.oneSelect
-            label Dodaj adres URL zdjęcia: 
-            div.selectForm
-              input(type='text', placeholder='adres URL' name='imgURL' value=data.image)
           button(type='submit' class='button top') zmień
 
   if(type==='addDrink')
@@ -88,11 +81,6 @@ block append content
             div.selectForm
               input(type='text', placeholder='mały' name='price1')
               input(type='text', placeholder='duży' name='price2')
-          div.formDrink
-            label Dodaj adres URL zdjęcia: 
-            div.selectForm
-              input(type='text', placeholder='adres URL' name='imgURL')
-          div.formDrink
           button(type='submit' class='button top') dodaj
     
  

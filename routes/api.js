@@ -286,7 +286,7 @@ router.post('/send_opinion', (req, res) => {
       userId: opinion.userId,
       data: dateFormat
     });
-    
+
     newOpinion.save(()=>{
       Opinion.find({}, (err,data)=>{
         res.send(data)

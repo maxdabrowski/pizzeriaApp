@@ -54,7 +54,6 @@ router.post('/menu_manage/pizza/add', (req,res) =>{
   const {ingr1, ingr2,ingr3,ingr4,ingr5} = req.body;
   const {size1, size2,size3} = req.body;
   const {price1, price2,price3} = req.body;
-  const url = req.body.imgURL;
 
   let ingredientsTab = [];
   if(ingr1 !== ''){
@@ -74,7 +73,6 @@ router.post('/menu_manage/pizza/add', (req,res) =>{
     ingredients: ingredientsTab,
     size:[size1,size2,size3],
     price: [price1,price2,price3],  
-    image: url,
   });
 
   pizzaData.save(()=>{
@@ -107,7 +105,6 @@ router.post('/menu_manage/pizza/change/:id', (req,res) =>{
   const {ingr1, ingr2,ingr3,ingr4,ingr5} = req.body;
   const {size1, size2,size3} = req.body;
   const {price1, price2,price3} = req.body;
-  const url = req.body.imgURL;
 
   let ingredientsTab = [];
   if(ingr1 !== ''){
@@ -126,8 +123,7 @@ router.post('/menu_manage/pizza/change/:id', (req,res) =>{
     {name: name,
     ingredients: ingredientsTab,
     size:[size1,size2,size3],
-    price: [price1,price2,price3],  
-    image: url}, ()=>{
+    price: [price1,price2,price3]}, ()=>{
       Pizza.find({}, (err,data)=>{
       res.render('manager/menu/pizza', {title: 'Manager menu', data})
       });
@@ -143,10 +139,7 @@ router.get('/menu_manage/drink', (req,res) =>{
       res.render('manager/menu/drink', {title: 'Napoje', data})
     });
 });
-
-
 router.get('/menu_manage/drink/add', (req,res) =>{ 
-
   res.render('manager/menu/form',{title:"Dodaj napój", type:"addDrink"})
 })
 
@@ -157,13 +150,11 @@ router.post('/menu_manage/drink/add', (req,res) =>{
   const name = req.body.name;
   const {size1, size2} = req.body;
   const {price1, price2} = req.body;
-  const url = req.body.imgURL;
 
   const drinkData = new Drink({
     name: name,
     size:[size1,size2],
     price: [price1,price2],  
-    image: url
   });
   drinkData.save(()=>{
     Drink.find({}, (err,data)=>{

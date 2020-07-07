@@ -246,9 +246,11 @@ td{
   margin-top: 0px !important;
 }
 
-
-
 @media (max-width:1024px){
+  .menuManageDescript{
+  font-size: 15px !important;
+  }
+
   .secondNav a{
     font-size: 15px;
   }
@@ -268,7 +270,7 @@ td{
   }
 }
 
-@media (max-width:768px){
+@media (max-width:768px){c
   .secondNav a{
     font-size: 15px;
     width: 100%;
@@ -333,4 +335,17 @@ td{
     margin-bottom: 10px !important;
 
   }
+  .delete{
+    position: static;
+    top: 0px;
+    left:0px ;
+  }
+.close{
+float: left;
+}
+
+.secondNav a{
+  width: 100%;
+}
+
 }
